@@ -1,165 +1,94 @@
-# Goals, Signals, and Metrics
+# 목표, 신호 및 지표
 
-There is a framework we use for picking metrics called “Goals-Signals-Metrics.” 
+"목표-신호-지표"라는 메트릭을 선택하는 데 사용하는 프레임워크가 있습니다.
 
-Basically, first you decide what the **goals** are that you want to achieve for
-your product or system. Then you decide on the **signals** you want to examine
-that tell you if you’re achieving your goal--essentially, these are what you
-would measure if you had perfect knowledge of everything. Then you choose
-**metrics** that give you some proxy or idea of that signal, since few signals
-can be measured perfectly.
+기본적으로 먼저 제품이나 시스템에서 달성하고자 하는 **목표**가 무엇인지 결정합니다. 그런 다음 목표를 달성하고 있는지 여부를 알려주는 **신호**를 조사할 대상을 결정합니다. 신호는 본질적으로 모든 것에 대한 완벽한 지식이 있다면 측정할 수 있을것입니다. 그런 다음 완벽하게 측정할 수 있는 신호는 거의 없으므로 해당 신호를 대신하거나 아이디어를 제공하는 **지표**를 선택합니다.
 
-- [Goals](#goals)
-  - [Example Goal](#example-goal)
-  - [Uncertainty](#uncertainty)
-- [Signals](#signals)
-- [Metrics](#metrics)
+- [목표](#goals)
+  - [목표 예시](#example-goal)
+  - [불확실성](#uncertainty)
+- [신호](#signals)
+- [지표](#metrics)
 
-## Goals
+## 목표
 
-A goal should be framed as the thing that you want your team, product, or
-project to accomplish. It should not be framed as "I want to measure X."
+목표는 팀, 제품 또는 프로젝트가 달성하기를 원하는 것으로 설정해야 합니다. "X를 측정하고 싶다"는 식으로 목표를 설정해서는 안 됩니다.
 
-**Most of the trouble that teams have in defining metrics comes from defining
-unclear goals.**
+**팀이 지표를 정의할 때 겪는 대부분의 문제는 불명확한 목표를 정의하는 데서 비롯됩니다.**
 
-_Webster's Third New International Dictionary_ defines a "goal" as: 
+_웹스터의 세 번째 새로운 국제 사전에서는 '목표'를 다음과 같이 정의합니다: 
 
-> The end toward which effort or ambition is directed; a condition or state to
-> be brought about through a course of action.
+> 노력이나 야망이 지향하는 목적; 행동 과정을 통해 가져올 조건이나 상태.
 
-This needs to be stated in a fashion specific enough that it _could be
-measured_. Not that you have to know in advance what all the metrics will be,
-but that conceptually, a person could know whether you were getting closer to
-(or further from) your goal.
+이는 측정할 수 있을 만큼 구체적인 방식으로 명시되어야 합니다. 모든 지표가 무엇인지 미리 알 필요는 없지만, 개념적으로 목표에 가까워지고 있는지 또는 멀어지고 있는지를 알 수 있어야 합니다.
 
-### Example Goal
+### 목표 예시
 
-In developing a goal, you can start with a vague statement of your desire. For
-example:
+목표를 세울 때는 원하는 바를 모호하게 설명하는 것부터 시작할 수 있습니다. 예를 들어:
 
-**LinkedIn's systems should be reliable.**
+**LinkedIn의 시스템은 신뢰할 수 있어야 합니다.**
 
-However, that's not measurable. So the first thing you do is **clarify
-definitions**. 
+하지만 이는 측정할 수 없습니다. 따라서 가장 먼저 해야 할 일은 **정의를 명확히 하는 것**입니다.
 
-First off, what does "LinkedIn's systems" mean? What does "reliable" mean? How
-do we choose which of our systems we want to measure? 
+먼저, "LinkedIn의 시스템"이란 무엇을 의미하나요? "신뢰할 수 있다"는 것은 무엇을 의미할까요? 측정할 시스템을 어떻게 선택해야 할까요?
 
-Well, to figure this out, we have to ask ourselves **why** we have this goal.
-The answer could be "We are the team that assures reliability of all the
-products that are used by LinkedIn's users." In that case, that would clarify
-our goal to be:
+이를 파악하기 위해 우리는 **왜** 이 목표를 가지고 있는지 스스로에게 물어봐야 합니다. "우리는 LinkedIn 사용자가 사용하는 모든 제품의 신뢰성을 보장하는 팀입니다."라고 답할 수 있습니다. 이 경우 우리의 목표가 명확해집니다:
 
-**The products that are used by LinkedIn's users should be reliable.**
+**LinkedIn 사용자가 사용하는 제품은 신뢰할 수 있어야 합니다.**
 
-That's still not measurable. Nobody could tell you, concretely, if you were
-accomplishing that goal. Here's the remaining problem: what does "reliable"
-mean?
+이는 아직 측정할 수 없습니다. 목표를 달성하고 있는지 구체적으로 알 수 있는 사람은 아무도 없습니다. 남은 문제는 "신뢰할 수 있다"는 것이 무엇을 의미할까요?
 
-Once again, we have to ask ourselves **why** we have this goal. To do this, we
-might look at the larger goals of the company. At LinkedIn, our [top-level
-vision](https://about.linkedin.com/) is: "Create economic opportunity for every
-member of the global workforce." This gives us some context to define
-reliability: we somehow want to look at  things that prevent us from
-accomplishing that vision. Of course, in a broad sense, there are _many_ factors
-that could prevent us: social, cultural, human, economic, etc. So we say, well,
-our scope is what we can do _technically_ with our software development and
-production-management processes, systems, and tools. What sort of technical
-issues would members experience as "unreliability" in that context? Probably
-bugs, performance issues, and downtime.
+다시 한 번, 우리는 **왜** 이 목표를 가지고 있는지 자문해봐야 합니다. 이를 위해 회사의 더 큰 목표를 살펴볼 수 있습니다. LinkedIn의 [가장 큰 비전](https://about.linkedin.com/)은 "전 세계 모든 인력을 위한 경제적 기회 창출"입니다. 이러한 비전을 달성하는 데 방해가 되는 요소들을 살펴보는 것이 신뢰성을 정의하는 데 도움이 됩니다. 물론 넓은 의미에서 보면 사회적, 문화적, 인적, 경제적 등 _여러 가지_ 요인이 우리를 방해할 수 있습니다. 그래서 우리의 범위는 소프트웨어 개발 및 생산 관리 프로세스, 시스템, 도구를 통해 _기술적으로_ 할 수 있는 일이라 말합니다. 이러한 맥락에서 구성원들은 어떤 종류의 기술적 문제를 '신뢰성 부족'으로 경험하나요? 아마도 버그, 성능 문제, 다운타임일 것입니다.
 
-So we could update our goal to be:
+그래서 목표를 다음과 같이 업데이트할 수 있었습니다:
 
-**LinkedIn's users have an experience of our products that is free from bugs,
-performance issues, and downtime.**
+**LinkedIn 사용자들은 버그, 성능 문제, 다운타임이 없는 제품을 경험할 수 있습니다.**
 
-We could get more specific and define "bug," "performance issue," and
-"downtime," if it's not clear to the team what those specifically mean. The
-trick here is to get something that's clear and measurable, without it being
-super long. What I would recommend, if you wanted to clarify those terms, is to
-create _sub-goals_ for each of those terms. That is, keep this as the overall
-goal, and then state three more goals, one for bugs, one for performance issues,
-and one for downtime, which do a better job of spelling out what each of those
-means.
+팀에서 '버그', '성능 문제', '다운타임'이 구체적으로 무엇을 의미하는지 명확하지 않다면 좀 더 구체적으로 정의할 수 있습니다. 여기서 요령은 너무 길지 않으면서도 명확하고 측정 가능한 것을 얻는 것입니다. 이러한 용어를 명확히 하고 싶다면 각 용어에 대한 _하위 목표_를 만드는 것이 좋습니다. 즉, 이 목표를 전체 목표로 설정한 다음 버그, 성능 문제, 다운타임이라는 세 가지 목표를 추가로 설정하면 각 목표가 의미하는 바를 더 잘 설명할 수 있습니다.
 
-One of the things that you'll notice about this exercise is that not only does
-it help us define our metrics, it actually helps clarify what is the most
-important work we should be doing. For example, this goal tells us that we
-should be paying _more_ attention to the experience of our users than the
-specific availability numbers of low-level services (even though we might care
-about those, too).
+이 연습에서 눈에 띄는 점 중 하나는 지표를 정의하는 데 도움이 될 뿐만 아니라 실제로 우리가 해야 할 가장 중요한 작업이 무엇인지 명확히 하는 데 도움이 된다는 것입니다. 예를 들어, 이 목표를 통해 하위 서비스의 구체적인 가용성 수치(물론 이것도 중요합니다)보다 사용자 경험에 _더 많은_ 주의를 기울여야 한다는 것을 알 수 있습니다.
 
-### Uncertainty
+### 불확실성
 
-**If you aren’t sure how to measure something, it’s very likely that you haven’t
-defined what it is that you are measuring.**  This was the problem with
-"developer productivity" measurements from the past--they didn’t define what
-“developer productivity” actually meant, concretely, exactly, in the physical
-universe. They attempted to measure an abstract nothing, so they had no real
-metrics. This is why it is so important to understand and clarify your goals
-before you start to think about metrics.
+**무언가를 측정하는 방법을 잘 모른다면, 측정하고자 하는 것이 무엇인지 정의하지 않았을 가능성이 큽니다.** 과거의 '개발자 생산성' 측정의 문제점은 '개발자 생산성'이 실제로 무엇을 의미하는지 구체적으로, 정확하게 정의하지 못했다는 점입니다. 추상적인 무언가를 측정하려고 했기 때문에 실제 측정 지표가 없었습니다. 그렇기 때문에 지표에 대해 생각하기 전에 목표를 이해하고 명확히 하는 것이 매우 중요합니다.
 
-## Signals
+## 신호
 
-Signals are what you would measure if you had perfect knowledge---if you knew
-everything in the world, including everything that was inside of everybody
-else's mind. These do not have to actually be measurable. They are a useful
-mental tool to help understand the areas one wants to measure. 
+신호는 완벽한 지식이 있다면, 즉 모든 사람의 마음속에 있는 모든 것을 포함하여 세상의 모든 것을 알고 있다면 측정할 수 있는 것입니다. 신호는 실제로 측정할 수 있는 것일 필요는 없습니다. 신호는 측정하고자 하는 영역을 이해하는 데 도움이 되는 유용한 정신적 도구입니다.
 
-Signals are the answer to the question, "How would you know you were achieving
-your goal(s)?"
+신호는 "목표를 달성하고 있는지 어떻게 알 수 있나요?"라는 질문에 대한 답입니다.
 
-For example, some signals around reliability might be:
+예를 들어, 신뢰성과 관련된 몇 가지 신호가 있을 수 있습니다:
 
-* Human effort spent resolving production incidents.
-* Human time spent debugging deployment failures.
-* Number of users who experienced a failure in their workflow due to a bug
-* Amount of time lost by users trying to work around failures.
-* How reliable LinkedIn's products are according to the _belief_ of our users.
-* User-perceived latency for each action taken by users.
+* 제품에 일어나는 사고 해결에 소요되는 인적 노력.
+* 배포 실패를 디버깅하는 데 소요된 인적 시간.
+* 버그로 인해 워크플로에 장애를 경험한 사용자 수
+* 사용자가 장애를 해결하려고 시도하는 과정에서 손실된 시간.
+* 사용자들이 _확신하는_ LinkedIn 제품의 신뢰도.
+* 사용자가 수행한 각 작업에 대해 사용자가 인지하는 지연 시간.
 
-The concept of "signals" can also be useful to differentiate them from "metrics"
-(things that can actually be measured). Sometimes people will write down a
-signal in a doc and then claim it is a metric, and this distinction in terms can
-help clarify that.
+'신호'라는 개념은 그것을 '지표'(실제로 측정할 수 있는 것)와 구분하는 데도 유용할 수 있습니다. 간혹 사람들이 문서에 신호를 기록하고 그것을 지표라고 주장하는 경우가 있는데, 이러한 용어 구분이 이를 명확히 하는 데 도움이 될 수 있습니다.
 
-## Metrics
+## 지표
 
-Metrics are numbers over time that can actually be measured. A metric has the
-following qualities:
+지표는 실제로 측정할 수 있는 시간 경과에 따른 숫자입니다. 지표에는 다음과 같은 특성이 있습니다:
 
-* It can actually be implemented, in the real world, and produce a concrete
-  number.
-* The number can be trended over time.
-* It is meaningful when the number goes up or goes down, and that meaning is
-  clear.
+* 실제 세계에서 구현하여 구체적인 숫자를 생성할 수 있습니다.
+* 이 숫자는 시간에 따른 추세를 파악할 수 있습니다.
+* 숫자가 증가하거나 감소할 때 의미가 있으며, 그 의미는 명확합니다.
 
-All metrics are _proxies_ for your signal. There are no perfect metrics. It is a
-waste of time to try to find the "one true metric" for anything. Instead, create
-multiple metrics and triangulate the truth from looking at different metrics.
-All metrics will have flaws, but _sets_ of metrics can collectively provide
-insight.
 
-Example metrics for our "reliability" goal from above might be something like:
+모든 지표는 신호들을 _대신_ 합니다. 완벽한 지표는 없습니다. 어떤 것에 대해 '하나의 진정한 지표'를 찾으려고 노력하는 것은 시간 낭비입니다. 대신, 여러 개의 지표를 만들고 서로 다른 지표를 살펴봄으로써 진실을 삼각 측량하세요. 모든 지표에는 결함이 있지만, 여러 지표를 _종합_하면 인사이트를 얻을 수 있습니다.
 
-* The percentage of user sessions that do not experience an error as determined
-  by our product telemetry.
-* Percentage of deployments that do not experience a failure requiring human
-  intervention.
-* Conduct a survey of a cross-section of users to ask them their opinion about
-  our reliability, where they give us a score, and aggregate the scores into a
-  metric.
-* Define what the "acceptable" highest latency would be for each UI action, and
-  then count how often UI interactions happen _under_ those thresholds. (Display
-  a percentage of how many UI interactions have an "acceptable" latency.)
+위의 '신뢰성' 목표에 대한 지표의 예는 다음과 같습니다:
 
-If you look at the signals above, you will see that some of these metrics map back
-to those signals.
+* 우리의 제품 측정에 의해 확인된 오류를 경험하지 않은 사용자 세션의 비율입니다.
+* 사람의 개입이 필요한 장애를 경험하지 않은 배포의 비율.
+* 일부 사용자를 대상으로 설문조사를 실시하여 안정성에 대한 의견을 묻고 점수를 부여한 다음, 그 점수를 집계하여 지표로 집계합니다.
+* 각 UI 동작에 대해 '허용 가능한' 최고 지연 시간을 정의한 다음, 해당 임계값 _아래_에서 UI 상호 작용이 발생하는 빈도를 계산합니다. (대기 시간이 "허용 가능한" 수준인 UI 상호 작용의 비율을 표시합니다.)
 
-Overall, there is a _lot_ to know about metrics, including what makes metrics
-good or bad, how to take action on them, what types of metrics to use in what
-situation, etc. It would be impossible to cover all of it in this doc, but we
-attempt to cover some of it in other docs on this site.
+위의 신호를 다시 보면 이러한 지표 중 일부가 해당 신호에 다시 매핑되는 것을 볼 수 있습니다.
 
-Next: [Developer Productivity &amp; Happiness Goals and Signals](dph-goals-and-signals.md)
+전반적으로 지표의 좋은 점과 나쁜 점, 지표에 대한 조치를 취하는 방법, 어떤 상황에서 어떤 유형의 지표를 사용해야 하는지 등 메트릭에 대해 알아야 할 것이 _많이_있습니다. 이 문서에서 모든 내용을 다루기는 불가능하지만 이 사이트의 다른 문서에서 일부 내용을 다루려고 합니다.
+
+다음: [개발자 생산성 및 행복 목표와 신호](dph-goals-and-signals.md)
