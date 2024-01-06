@@ -23,7 +23,7 @@ LinkedIn은 개발자를 이해하고, 엔지니어링 작업의 성공 여부�
   * [정성적 측정과 정량적 측정 비교](qualitative-vs-quantitative.md)
   * [대상: 데이터의 사용 대상이 누구인지 알고있기](audiences.md)
   * [데이터로 의사 결정 추진](driving-decisions.md)
-  * [Data Collection Principles](data-collection-principles.md)
+  * [데이터 수집 원칙](data-collection-principles.md)
 * **정량적 지표: 일반적인 팁 및 가이드라인**
   * [지표 설계의 원칙 및 가이드라인](metric-principles.md)
   * [지표를 설계할 때 흔히 범하기 쉬운 함정](metric-pitfalls.md)
