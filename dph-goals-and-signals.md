@@ -1,240 +1,141 @@
-# Developer Productivity and Happiness: Goals and Signals
+# 개발자 생산성 및 행복도 목표와 신호
 
-This is a proposal, at the highest level, of what we try to measure to improve
-the productivity of engineering teams. This should help guide the creation of
-metrics and analysis systems. This is not a complete listing of every single
-thing that we want to measure regarding developer productivity. It is an
-aspirational description of _how_ we would ideally be measuring things and _how_
-we should come up with new metrics.
+이는 엔지니어링 팀의 생산성 향상을 위해 측정하고자 하는 사항을 가장 높은 수준에서 제안한 것입니다. 이는 지표와 분석 시스템을 만드는 데 도움이 될 것입니다. 개발자의 생산성과 관련하여 측정하고자 하는 모든 사항을 모두 나열한 것은 아닙니다. 이상적인 측정 방법과 새로운 지표를 _어떻게_ 만들어야 하는지에 대한 목표적인 설명입니다.
 
-It is based on the [Goals, Signals, Metrics system](goals-signals-metrics.md).
-This document contains our primary Goals and Signals.
+이 문서는 [목표, 신호 및 지표](goals-signals-metrics.md)를 기반으로 합니다. 이 문서에는 주요 목표와 신호가 포함되어 있습니다.
 
-- [Goals](#goals)
-  - [Productive](#productive)
-  - [Happy](#happy)
-  - [Not Limited to Tools and Infrastructure](#not-limited-to-tools-and-infrastructure)
-- [Signals](#signals)
-  - [Productive](#productive-1)
-    - [Efficient](#efficient)
-    - [Caution: Don't Compare Individual Efficiency](#caution-dont-compare-individual-efficiency)
-    - [Effective](#effective)
-    - [Over-Indexing On A Single Effectiveness Metric](#over-indexing-on-a-single-effectiveness-metric)
-  - [Happy](#happy-1)
+- [목표](#목표)
+  - [생산성](#생산성)
+  - [행복](#행복)
+  - [도구 및 인프라에 국한되지 않음](#도구-및-인프라에-국한되지-않음)
+- [신호](#신호)
+  - [생산성](#생산성-1)
+    - [효율성](#효율성)
+    - [주의: 개별 효율을 비교하지 마세요](#주의:-개별-효율을-비교하지-마세요)
+    - [효과](#효과)
+    - [단일 효과 지표에 대한 과도한 인덱싱](#단일-효과-지표에-대한-과도한-인덱싱)
+  - [행복](#행복-1)
 
-## Goals
+## 목표
 
-The simplest statement of our goal would be:
+우리의 목표를 가장 간단하게 설명하면 다음과 같습니다:
 
-Developers at LinkedIn are **productive** and **happy**.
+LinkedIn의 개발자는 생산적이고 행복합니다.
 
-That could use some clarification, though.
+하지만 여기에는 약간의 설명이 필요할 수 있습니다.
 
-### Productive
+### 생산성
 
-What "productive" means isn't very clear, though—what are we actually talking
-about? So, we can refine "Developers at LinkedIn are productive" to:
+하지만 '생산적'이라는 의미가 명확하지 않은데, 실제로는 어떤 것을 말하는 것일까요? 따라서 "LinkedIn의 개발자는 생산적입니다"를 다음과 같이 구체화할 수 있습니다:
 
-**Developers at LinkedIn are able to _effectively_ and _efficiently_ accomplish
-their _intentions_ regarding LinkedIn's _software systems_**.
+**LinkedIn의 개발자는 LinkedIn의 _소프트웨어 시스템_ 과 관련하여 _의도_ 를 _효과적_ 이고 _효율적_ 으로 달성할 수 있습니다.**
 
-This is a more precise way of stating exactly what we mean by "productive." A
-person is productive, by definition, if they produce products efficiently.
-"Efficiently" implies that you want to measure something about how long it takes
-or how often a product can be produced. So that means that we have to have a
-time that we start measuring from, and a time that we stop measuring at. The
-earliest point we can think of wanting to measure is the moment when the
-developer directly _intends_ to do something (as in, the intention they have
-right before they start to take action, not the first time they have some idle
-thought), and the last moment is when that action is totally complete.
+이는 "생산적"이라는 의미를 보다 정확하게 표현하는 방법입니다. 정의에 따라 제품을 효율적으로 생산하면 생산적이라고 할 수 있습니다. "효율적으로"라는 말은 제품을 생산하는 데 걸리는 시간이나 빈도를 측정하고 싶다는 뜻입니다. 즉, 측정을 시작하는 시점과 측정을 중단하는 시점이 있어야 한다는 뜻입니다. 측정하고 싶은 가장 이른 시점은 개발자가 직접 무언가를 _하려고 하는_ 순간(즉, 처음에 멍하니 생각하는 것이 아니라 행동을 시작하기 직전의 의도)이고, 마지막 시점은 그 행동이 완전히 완료되는 순간입니다.
 
-There are many different intentions a developer could have: gathering
-requirements, writing code, running tests, releasing software, creating a whole
-feature end-to-end, etc. They exist on different levels and different scopes.
-It's "fractal," basically—there are larger intentions (like "build a whole
-software system") that have smaller intentions within them (like "write this
-code change"), which themselves have smaller intentions within them ("run a
-build"), etc.
+요구 사항 수집, 코드 작성, 테스트 실행, 소프트웨어 출시, 전체 기능의 엔드투엔드 제작 등 개발자가 가질 수 있는 의도는 매우 다양합니다. 이러한 의도는 서로 다른 수준과 범위에 존재합니다. 기본적으로 "프랙탈"이라고 할 수 있는데, "전체 소프트웨어 시스템 구축"과 같은 큰 의도가 있고, 그 안에 "이 코드 변경 사항 작성"과 같은 작은 의도가 있으며, 그 안에 다시 더 작은 의도가 있는("빌드 실행") 등의 의도가 있습니다.
 
-The goal also states "effectively," because we don't just care that a result was
-_fast_, we care that the intention was _actually carried out_ in the most
-complete sense. For example, if I can release my software quickly but my service
-has 3 major production incidents a day, then I'm not as effective as I could be,
-even if I'm efficient. It's reasonable to assume that no developer intends to
-release a service that fails catastrophically multiple times a day, so that
-system isn't accomplishing a developer's intention.
+목표에도 '효과적으로'라는 표현이 나오는데, 이는 단순히 결과가 _빨리_ 나오는 것뿐만 아니라 의도가 가장 완벽한 의미에서 _실제로 수행되었는지를_ 중요하게 생각하기 때문입니다. 예를 들어, 소프트웨어를 빠르게 출시할 수 있지만 서비스에서 하루에 3건의 주요 프로덕션 인시던트가 발생한다면 아무리 효율적이라고 해도 그다지 효과적이라고 할 수 없습니다. 어떤 개발자도 하루에 여러 번 치명적인 장애가 발생하는 서비스를 출시할 의도는 없을 것이므로 해당 시스템은 개발자의 의도를 달성하지 못한다고 보는 것이 합리적입니다.
 
-### Happy
+### 행복
 
-Happy about what? Well, here's a more precise statement:
+무엇이 행복하게 하나요? 좀 더 정확하게 표현하자면 이렇습니다:
 
-**Developers at LinkedIn are happy with the tools, systems, processes,
-facilities, and activities involved in software development at LinkedIn.**
+**LinkedIn의 개발자들은 LinkedIn의 소프트웨어 개발과 관련된 도구, 시스템, 프로세스, 시설 및 활동에 만족하고 있습니다..**
 
-### Not Limited to Tools and Infrastructure
+### 도구 및 인프라에 국한되지 않음
 
-Note that although the primary focus of our team is on Tools & Infrastructure,
-neither of these goals absolutely limit us to Tools & Infrastructure. If we
-discover that something outside of our area is impacting developer productivity
-in a significant way, like a facilities issue or process issue, we should feel
-empowered to raise that issue to the group that handles that problem.
+저희 팀의 주요 초점은 도구 및 인프라에 있지만, 이 두 가지 목표가 저희를 도구 및 인프라에만 국한시키지는 않는다는 점에 유의하세요. 시설 문제나 프로세스 문제처럼 우리 영역 밖의 문제가 개발자 생산성에 중대한 영향을 미치는 것을 발견하면 해당 문제를 처리하는 그룹에 문제를 제기할 수 있는 권한을 부여받아야 합니다.
 
-## Signals
+## 신호
 
-Let's break down each goal by its parts.
+각 목표를 부분별로 세분화해 보겠습니다.
 
-### Productive
+### 생산성
 
-We'll break this down into signals for "effective" and signals for "efficient."
+이를 "효율성"이라는 신호와 "효과"라는 신호로 구분해 보겠습니다.
 
-#### Efficient
+#### 효율성
 
-Essentially, we want to measure the time between when a developer has an
-intention and the time when they accomplish that intention. This is probably
-best framed as: 
+기본적으로 개발자가 의도를 가진 시점과 그 의도를 달성한 시점 사이의 시간을 측정하고자 합니다. 이는 아마도 다음과 같이 표현하는 것이 가장 적절할 것입니다:
 
-**The time from when a developer starts taking an action to when they accomplish
-what they were intending to accomplish, with that action.**
+**개발자가 작업을 수행하기 시작한 시점부터 해당 작업을 통해 의도한 바를 달성할 때까지의 시간입니다.**
 
-It's worth remembering that there are many different types of intentions and
-actions that a developer takes, some large, some small. Here are some examples
-of more specific signals that you might want to examine:
+개발자가 취하는 의도와 행동에는 크고 작은 다양한 유형이 있다는 점을 기억할 필요가 있습니다. 다음은 살펴볼 수 있는 좀 더 구체적인 신호의 몇 가지 예입니다:
 
-* The time between when a developer encounters a problem or confusion and when
-  they get the answer they are looking for (such as via docs, support, etc.).
-* How long it takes from when developers start writing a piece of code to when
-  it is released in production.
+* 개발자가 문제나 혼란을 겪을 때와 원하는 답을 얻을 때까지(예: 문서, 지원 등을 통해) 걸리는 시간입니다.
+* 개발자가 코드 작성을 시작한 시점부터 프로덕션 환경에 배포될 때까지 걸리는 시간입니다.
 
-There are many other signals that you could come up with—those are just
-examples.
+이 외에도 다양한 신호가 있을 수 있지만, 이는 단지 예시일 뿐입니다.
 
-It's also worth keeping in mind:
+또한 이것을 기억하세요:
 
-**The most important resource we are measuring, in terms of efficiency, is the
-amount of time that software engineers have to spend on something.**
+**효율성 측면에서 측정하는 가장 중요한 리소스는 소프트웨어 엔지니어가 무언가에 투자해야 하는 시간입니다.**
 
-That's _sort of_ a restatement of the above signal, but it's a clearer way to
-think about some types of specific signals. In particular, it considers the
-whole sum of time spent on things. For example, these could be specific signals
-that you want to measure:
+이는 위의 신호를 다시 설명한 것이지만, _몇 가지 유형_ 의 특정 신호에 대해 더 명확하게 생각할 수 있는 방법입니다. 특히 사물에 소비한 시간의 총합을 고려합니다. 예를 들어, 이러한 신호는 측정하려는 특정 신호일 수 있습니다:
 
-- How much time developers actually spend waiting for builds each day.
-- How much time developers spend on non-coding activities.
+- 개발자가 매일 빌드를 기다리는 데 실제로 소비하는 시간.
+- 개발자가 코딩 이외의 활동에 소비하는 시간.
 
-The general point is that we care more about the time that human beings have to
-spend (or wait) to do a task, and less about the time that machines have to
-spend.
+일반적으로 우리는 사람이 작업을 수행하기 위해 소비(또는 대기)해야 하는 시간에 더 많은 관심을 기울이고, 기계가 소비해야 하는 시간에는 덜 관심을 기울입니다.
 
-And there are many, many more signals that you could come up with in this
-category, too.
+이 카테고리에는 훨씬 더 많은 신호가 있을 수 있습니다.
 
-#### Caution: Don't Compare Individual Efficiency
+#### 주의: 개별 효율을 비교하지 마세요
 
-Don't propose metrics, systems, or processes that are intended to rate the
-efficiency of individual engineers. We [aren't trying to create systems for
-performance ratings of employees](metrics-and-performance-reviews.md). We are
-creating systems that drive our developer productivity work.
+개별 엔지니어의 효율성을 평가하기 위한 지표, 시스템 또는 프로세스를 제안하지 마세요. [직원의 성과 평가를 위한 시스템을 만들려고 하는 것이 아닙니다](metrics-and-performance-reviews.md). 우리는 개발자의 생산성 향상을 위한 시스템을 만들고 있습니다.
 
-It's even worth thinking about whether or not your system _could_ be used this
-way, and either prevent it from being used that way in how the system is
-designed, or forbid that usage via cautions in the UI/docs.
+시스템을 이런 식으로 사용할 수 _있는지_ 에 대해 생각해보고 시스템 설계 방식에서 이런 식으로 사용하지 못하도록 하거나 UI/문서에서 주의 문구를 통해 사용을 금지하는 것도 좋습니다.
 
-#### Effective
+#### 효과
 
-Essentially, we want to know that when a developer tries to do something, they
-actually accomplish the thing they were intending to accomplish. Things like
-crashes, bugs, difficulty gathering information—these are all things that
-prevent an engineer from being effective.
+기본적으로 우리는 개발자가 무언가를 시도했을 때 실제로 의도한 바를 달성했는지 알고 싶습니다. 충돌, 버그, 정보 수집의 어려움 등은 모두 엔지니어의 효율을 떨어뜨리는 요소입니다.
 
-When problems occur in a developer's workflow, we want to know how often they
-occur and how much time they waste. Probably the best high-level signal for this
-would be phrased like:
+개발자의 워크플로에서 문제가 발생하면 얼마나 자주 발생하고 얼마나 많은 시간을 낭비하는지 알고 싶습니다. 이를 위한 가장 높은 수준의 신호는 아마도 다음과 같은 문구일 것입니다:
 
-**The probability that an individual developer will be able to accomplish their
-intention successfully. (Or on the inverse, the frequency with which developers
-experience a failure.)**
+**개별 개발자가 자신의 의도를 성공적으로 달성할 수 있는 확률입니다. (또는 반대로 개발자가 실패를 경험하는 빈도).**
 
-You have to take into account the definition of "success" appropriately for the
-thing you're measuring. For example, let's say a developer, for some reason, has
-the intention "I run all my tests and they pass." In that case, if a test fails,
-they've failed to accomplish their intention. But most of the time, a developer
-runs tests to know if the code they are working on is broken. So success would
-be, "I ran the tests and they only failed if I broke them." Thus, flaky tests,
-infrastructure failures, or being broken by a dependency would _not_ be the
-developer accomplishing their intention successfully. Defining the intention
-here is important.
+측정 대상에 따라 '성공'의 정의를 적절히 고려해야 합니다. 예를 들어, 개발자가 어떤 이유로 "모든 테스트를 실행하여 모두 통과했다"는 의도를 가지고 있다고 가정해 보겠습니다. 이 경우 테스트가 실패하면 의도를 달성하지 못한 것입니다. 하지만 대부분의 경우 개발자는 작업 중인 코드가 손상되었는지 확인하기 위해 테스트를 실행합니다. 따라서 성공은 "테스트를 실행했는데 실패했다"는 뜻이 됩니다. 따라서 테스트가 실패하거나, 인프라에 장애가 발생하거나, 종속성에 의해 중단되는 것은 개발자가 의도를 성공적으로 달성한 것이 _아닙니다_. 여기서 의도를 정의하는 것이 중요합니다.
 
-We use _probability_ here because what we care about is how individual engineers
-are actually impacted by a problem. For example, let's say you have a piece of
-testing infrastructure that's flaky 10% of the time. What does that actually
-mean for engineers? How often is an engineer impacted by that flakiness? Maybe
-the system mostly just runs tests in the background that affect very few people.
+여기서 _확률을_ 사용하는 이유는 개별 엔지니어가 실제로 문제로 인해 어떤 영향을 받는지에 관심이 있기 때문입니다. 예를 들어 테스트 인프라에 10%의 확률로 문제가 발생한다고 가정해 보겠습니다. 이는 엔지니어에게 실제로 어떤 의미일까요? 엔지니어는 얼마나 자주 이러한 취약성으로 인해 영향을 받을까요? 시스템이 대부분 백그라운드에서 극소수의 사용자에게만 영향을 미치는 테스트를 실행할 수도 있습니다.
 
-In order to define this probability appropriately, you have to know what group
-of engineers you're looking at. You could be looking at the whole company, or
-some specific [persona](developer-personas.md), area, org, or team.
+이 확률을 적절하게 정의하려면 어떤 엔지니어 그룹을 대상으로 하는지 알아야 합니다. 회사 전체를 대상으로 할 수도 있고, 특정 [페르소나](developer-personas.md), 영역, 조직 또는 팀을 대상으로 할 수도 있습니다.
 
-Some specific examples of possible signals here would be:
+여기서 가능한 신호의 구체적인 예는 다음과 같습니다:
 
-* The probability that when a developer runs a test in CI, it will produce valid
-  results (that is, if it fails, it's not because of flakiness).
-- The probability that a developer will run a build without the build tool
-  crashing.
-- How often (such as the median number of times per day) a developer experiences
-  build tool crashes.
+* 개발자가 CI에서 테스트를 실행할 때 유효한 결과를 생성할 확률(즉, 실패하더라도 결함 때문이 아닌 경우)입니다.
+- 개발자가 빌드 도구가 충돌하지 않고 빌드를 실행할 확률입니다.
+- 개발자가 빌드 도구 충돌을 경험하는 빈도(예: 하루 평균 횟수)입니다.
+- 
+여기서 우리가 가장 중요하게 생각하는 것은 도구에서 일어나는 일뿐만 아니라 개발자가 실제로 경험하는 일이라는 점을 명심해야 합니다.
 
-It's important to keep in mind here that what we care about most is what
-developers actually experience, not just what's happening with the tool.
+하지만 어떤 일이 _얼마나 자주_ 발생하는지 아는 것만으로는 그 영향을 이해하기에 충분하지 않은 경우가 많습니다. 여기서도 효율성과 연관 지어 생각해 볼 수 있습니다:
 
-Very often, just knowing _how often_ something happens isn't enough to
-understand its impact, though. You also might want to tie things back to
-efficiency here, by noting:
+**장애로 인해 추가로 소요된 업무 시간.**
 
-**How much extra human time was spent as a result of failures.**
+예를 들어, 15명의 엔지니어가 3일 동안 프로덕션 인시던트를 처리하느라 바쁘게 움직였다는 사실을 알면 좋을 것 같지 않나요? 그렇다면 근본 원인 해결의 중요성이 달라집니다. 여기에 몇 가지 신호가 있을 수 있습니다:
 
-For example, it would be good to know that 15 engineers were caught up for three
-days handling a production incident, wouldn't it? That changes the importance of
-addressing the root causes, there. Some signals here could be:
+- 테스트가 실패한 후 테스트를 다시 실행하는 데 소요된 시간.
+- 릴리스 인프라 장애로 인해 개발자가 릴리스 파이프라인을 통해 변경 사항을 셰퍼링하는 데 소요된 시간.
 
-- How much time was spent re-running tests after they had flaky failures.
-- How much time a developer had to spend shepherding a change through the
-  release pipeline due to release infrastructure failures.
+하지만 모든 실패가 흑백으로 나뉘는 것은 아닙니다. 의도가 _부분적으로_ 성공하는 경우도 많습니다. 예를 들어, 0.01%의 사용자에게만 영향을 미치는 버그가 있는 기능을 출시할 수도 있습니다. 따라서 때로는 다음을 알고 있는 것도 유용합니다:
 
-Not all failures are black and white, though. Very often, an intention
-_partially_ succeeds. For example, I might release a feature with a bug that
-affects only 0.01% of my users. Thus, it is sometimes also useful to know:
+**개발자가 수행하는 각 작업의 성공률을 백분율로 나타낸 값입니다.**
 
-**The percentage _degree_ of success of each action that a developer takes.**
+예를 들어, 플레이크를 살펴보는 한 가지 방법은 실행당 실제로 얼마나 많은 테스트가 플레이크가 발생했는지를 살펴보는 것입니다. 즉, 테스트 스위트에 10개의 테스트가 있는데 단 하나의 테스트만 플레이크로 인해 실패했다면 해당 특정 테스트 스위트의 특정 실행의 성공률은 90%입니다.
 
-For example, one way to look at flakiness is how many tests per run actually
-flake. That is, if I have 10 tests in my test suite but only one fails due to
-flakiness, then that specific run of that specific test suite had a 90% success
-rate.
+#### 단일 효과 지표에 대한 과도한 인덱싱
 
-#### Over-Indexing On A Single Effectiveness Metric
+이러한 '효과' 신호 중 하나에 지나치게 집착하지 않는 것이 중요합니다. 때로는 실패 확률은 낮지만 실패가 발생했을 때 인적 시간 측면에서 매우 큰 영향을 미치기 때문입니다. 측정하려는 대상에 적합한 _모든_ 신호에 대한 데이터를 확보하는 것이 도움이 됩니다.
 
-It's important not to over-index on any one of these "effectiveness" signals.
-Sometimes, the probability of a failure is low, but it is very impactful in
-terms of human time when the failure occurs. It's helpful to have data for _all_
-of the signals, as appropriate for the thing you're measuring.
+### 행복
 
-### Happy
+일반적으로 우리는 주관적인 신호를 통해 행복도를 평가합니다. 기본적으로 우리는 다음을 알고 싶어 합니다:
 
-Usually, we rate happiness via subjective signals. Basically we want to know:
+1. **LinkedIn에서 소프트웨어 엔지니어링과 관련된 도구, 시스템, 프로세스, 시설 및 활동에 만족하는 소프트웨어 엔지니어의 비율입니다.**
+2. **엔지니어가 얼마나 행복한지를 나타내는 점수입니다.**
+3. 
+그리고 특정 도구, 시스템, 프로세스, 시설에 따라 세분화할 수 있습니다. 사람들이 더 쉽게 반응할 수 있는 보다 구체적인 표현으로 행복 대신 '만족'이라는 표현을 자주 사용합니다.
 
-1. **The percentage of software engineers that are happy with the tools,
-   systems, processes, facilities, and activities involved in software
-   engineering at LinkedIn.**
-2. **A score for _how_ happy those engineers are.**
+우리의 가정 중 하나는 '생산성' 섹션의 정량적 지표를 개선하면 개발자의 행복도가 높아져야 한다는 것입니다. 만약 행복도가 증가하지 _않는다면_ 생산성에 대한 정량적 신호에 문제가 있거나, 잘못된 신호/지표를 선택했거나, 데이터에 부정확한 부분이 있다는 뜻일 수 있습니다.
 
-And you can break it down for specific tools, systems, processes, and
-facilities. Very often we say "satisfied" instead of happy, as a more concrete
-thing that people can respond more easily to.
-
-One of our assumptions is that if you improve the quantitative metrics in the
-"Productive" section, you should increase developer happiness. If happiness
-_doesn't_ increase, then that probably means there's something wrong with your
-quantitative signals for productivity—either you've picked the wrong
-signal/metric, or there's some inaccuracy in the data.
-
-Next: [Developer Personas](developer-personas.md)
+다음: [개발자 페르소나](developer-personas.md)
